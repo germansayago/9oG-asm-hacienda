@@ -1,0 +1,32 @@
+.hero {
+  min-height: 80vh;
+  position: relative;
+
+  background-image: url("/images/hero.webp");
+  background-size: cover;
+  background-position: center center;
+
+  &-overlay {
+    background-color: rgba(#000, 0.4);
+    min-height: 80vh;
+  }
+  &-content {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    h1 {
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 12px #000;
+    }
+    .lead {
+      text-shadow: 2px 2px 12px #000;
+    }
+  }
+}
