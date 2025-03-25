@@ -1,0 +1,19 @@
+.auctions {
+  padding: 100px 0;
+
+  .card {
+    margin-bottom: 30px;
+    &-body {
+      text-align: center;
+      font-weight: 700;
+      padding: 15px;
+    }
+    &-title {
+      margin-bottom: 0;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: -0.02rem;
+    }
+  }
+}

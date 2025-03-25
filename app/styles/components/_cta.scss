@@ -1,0 +1,53 @@
+.cta {
+  //padding: 60px 0;
+  background-color: darken($gray-900, 2%);
+  color: white;
+  &-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+  }
+  &-text {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+  }
+  &-button {
+    //min-height: 100%;
+    //display: flex;
+    //align-items: center;
+    //justify-content: center;
+  }
+  &-content {
+    //padding: 0 20px 20px 20px;
+    background-color: $gray-900;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  &-img {
+    height: 400px;
+    background-image: url("/images/hero.webp");
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
+@media (max-width: 767px) {
+  .cta {
+    text-align: center;
+    &-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-top: 30px;
+    }
+    &-text {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+    &-button {
+      min-height: 100%;
+    }
+  }
+}
