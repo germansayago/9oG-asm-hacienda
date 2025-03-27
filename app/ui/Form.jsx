@@ -32,7 +32,6 @@ export default function Form() {
 
   const { values, handleInputChange, reset } = useForm(initialValues);
   const [loading, setLoading] = useState(false);
-  const [isSended, setIsSended] = useState(false);
   const [error, setError] = useState(false);
 
   const { fname, lname, email, phone, location } = values;
@@ -41,14 +40,22 @@ export default function Form() {
     e.preventDefault();
     setError(false);
 
+    // Honeypot
     if (values.honey !== "") {
       console.warn("Formulario bloqueado por honeypot.");
       return;
     }
 
+    // Verificación de clave reCAPTCHA
+    if (!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY) {
+      console.error("Falta la site key de reCAPTCHA");
+      setError(true);
+      return;
+    }
+
     grecaptcha.ready(async () => {
       const token = await grecaptcha.execute(
-        "6LefrhcqAAAAAOYZfVzxDH4I5IqQ1YGggD-B-spc",
+        process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
         {
           action: "submit",
         }
@@ -105,112 +112,102 @@ export default function Form() {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-md-8 col-lg-6">
-            {isSended ? (
-              <div className="alert alert-success text-center">
-                ¡Formulario enviado correctamente!
-                <button
-                  className="btn btn-link d-block mt-2"
-                  onClick={() => setIsSended(false)}
-                >
-                  Enviar otro
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit}>
-                <div className="row g-3">
-                  <div className="col-md-6">
-                    <input
-                      type="text"
-                      name="fname"
-                      className="form-control"
-                      placeholder="Nombre"
-                      value={fname}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <input
-                      type="text"
-                      name="lname"
-                      className="form-control"
-                      placeholder="Apellido"
-                      value={lname}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <input
-                      type="email"
-                      name="email"
-                      className="form-control"
-                      placeholder="Email"
-                      value={email}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <input
-                      type="text"
-                      name="phone"
-                      className="form-control"
-                      placeholder="Teléfono"
-                      value={phone}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="col-md-12">
-                    <input
-                      type="text"
-                      name="location"
-                      className="form-control"
-                      placeholder="Localidad"
-                      value={location}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="col-md-12">
-                    <input
-                      type="text"
-                      name="honey"
-                      className="d-none"
-                      value={values.honey}
-                      onChange={handleInputChange}
-                      autoComplete="off"
-                    />
-                  </div>
-                  <div className="col-md-12 text-end">
-                    <button
-                      type="submit"
-                      className="btn btn-lg btn-success"
-                      disabled={loading}
-                    >
-                      {loading ? (
-                        <>
-                          Enviando...
-                          <span className="spinner-border spinner-border-sm ms-2"></span>
-                        </>
-                      ) : (
-                        "Enviar Consulta"
-                      )}
-                    </button>
-                  </div>
+            <form onSubmit={handleSubmit}>
+              <div className="row g-3">
+                <div className="col-md-6">
+                  <input
+                    type="text"
+                    name="fname"
+                    className="form-control"
+                    placeholder="Nombre"
+                    value={fname}
+                    onChange={handleInputChange}
+                    required
+                  />
                 </div>
-                {error && (
-                  <div className="alert alert-danger mt-3">
-                    Error al enviar el formulario. Verificá los datos.
-                  </div>
-                )}
-              </form>
-            )}
+                <div className="col-md-6">
+                  <input
+                    type="text"
+                    name="lname"
+                    className="form-control"
+                    placeholder="Apellido"
+                    value={lname}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div className="col-md-6">
+                  <input
+                    type="email"
+                    name="email"
+                    className="form-control"
+                    placeholder="Email"
+                    value={email}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div className="col-md-6">
+                  <input
+                    type="text"
+                    name="phone"
+                    className="form-control"
+                    placeholder="Teléfono"
+                    value={phone}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div className="col-md-12">
+                  <input
+                    type="text"
+                    name="location"
+                    className="form-control"
+                    placeholder="Localidad"
+                    value={location}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div className="col-md-12">
+                  <input
+                    type="text"
+                    name="honey"
+                    className="d-none"
+                    value={values.honey}
+                    onChange={handleInputChange}
+                    autoComplete="off"
+                  />
+                </div>
+                <div className="col-md-12 text-end">
+                  <button
+                    type="submit"
+                    className="btn btn-lg btn-success"
+                    disabled={loading}
+                  >
+                    {loading ? (
+                      <>
+                        Enviando...
+                        <span className="spinner-border spinner-border-sm ms-2"></span>
+                      </>
+                    ) : (
+                      "Enviar Consulta"
+                    )}
+                  </button>
+                </div>
+              </div>
+              {error && (
+                <div className="alert alert-danger mt-3">
+                  Error al enviar el formulario. Verificá los datos.
+                </div>
+              )}
+            </form>
           </div>
-          <Script src="https://www.google.com/recaptcha/api.js?render=6LefrhcqAAAAAOYZfVzxDH4I5IqQ1YGggD-B-spc" />
         </div>
       </div>
+      <Script
+        src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+      />
     </section>
   );
 }
