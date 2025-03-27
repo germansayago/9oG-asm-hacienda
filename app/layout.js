@@ -1,4 +1,5 @@
 import { Open_Sans } from "next/font/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 import "@/styles/app.scss";
 import Script from "next/script";
 import Header from "./ui/Header";
@@ -29,6 +30,9 @@ export default function RootLayout({ children }) {
       <body suppressHydrationWarning={true}>
         <Header />
         {children}
+        {!process.env.NODE_ENV != "development" && (
+          <GoogleTagManager gtmId="GTM-TMTTM928" />
+        )}
         <Footer />
       </body>
     </html>
