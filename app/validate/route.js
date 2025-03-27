@@ -1,4 +1,4 @@
-const secret_key = "6LefrhcqAAAAAEeIUepCLEuJtypQw_vQR5fQcGxr";
+const secret_key = process.env.RECAPTCHA_SECRET_KEY;
 
 export async function POST(request) {
   const data = await request.json();
