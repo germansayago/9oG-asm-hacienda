@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Form from "./Form";
 
 export default function Contact() {
@@ -15,7 +16,9 @@ export default function Contact() {
           </div>
         </div>
 
-        <Form />
+        <Suspense>
+          <Form />
+        </Suspense>
       </div>
     </section>
   );
