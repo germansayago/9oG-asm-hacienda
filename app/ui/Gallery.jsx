@@ -1,80 +1,25 @@
-"use client";
+import { getGalleryImages } from "@/lib/contentful";
+import GalleryClient from "./GalleryClient";
 
-import { useState } from "react";
-import Image from "next/image";
-import { Container, Row, Col, Card, Modal, Button } from "react-bootstrap";
+export default async function Gallery() {
+  // Obtener entradas del modelo Gallery desde Contentful
+  const entries = await getGalleryImages();
 
-const images = [
-  { src: "/images/galeria/foto1.png", alt: "Foto 1" },
-  { src: "/images/galeria/foto2.png", alt: "Foto 2" },
-  { src: "/images/galeria/foto3.png", alt: "Foto 3" },
-  { src: "/images/galeria/foto1.png", alt: "Foto 4" },
-  { src: "/images/galeria/foto1.png", alt: "Foto 5" },
-  { src: "/images/galeria/foto1.png", alt: "Foto 6" },
-  { src: "/images/galeria/foto1.png", alt: "Foto 7" },
-  { src: "/images/galeria/foto1.png", alt: "Foto 8" },
-];
-
-export default function Gallery() {
-  const [show, setShow] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  const handleShow = (img) => {
-    setSelectedImage(img);
-    setShow(true);
-  };
+  // Unificar todas las imágenes cargadas en un único array
+  const images = entries.flatMap((entry) => entry.fields.images || []);
 
   return (
     <section className="gallery">
-      <Container>
-        <Row className="header justify-content-center">
-          <Col md={6} className="text-center">
-            <h2>Remates Ganaderos</h2>
-            <p className="lead">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Voluptates, eveniet.
-            </p>
-          </Col>
-        </Row>
+      <div className="container">
+        <div className="row justify-content-center mb-4">
+          <div className="col-md-6 text-center">
+            <h2>Galería de Fotos</h2>
+          </div>
+        </div>
 
-        <Row className="g-3">
-          {images.map((img, index) => (
-            <Col key={index} xs={6} md={4} lg={3}>
-              <Card
-                className="border-0 shadow-sm"
-                role="button"
-                onClick={() => handleShow(img)}
-              >
-                {/* eslint-disable-next-line */}
-                <img src={img.src} alt={img.alt} className="rounded" />
-              </Card>
-            </Col>
-          ))}
-        </Row>
-      </Container>
-
-      {/* Lightbox Modal */}
-      <Modal show={show} onHide={() => setShow(false)} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Vista Previa</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="text-center">
-          {selectedImage && (
-            <Image
-              src={selectedImage.src}
-              alt={selectedImage.alt}
-              width={960}
-              height={720}
-              className="img-fluid"
-            />
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShow(false)}>
-            Cerrar
-          </Button>
-        </Modal.Footer>
-      </Modal>
+        {/* Componente cliente que maneja la UI interactiva */}
+        <GalleryClient images={images} />
+      </div>
     </section>
   );
 }

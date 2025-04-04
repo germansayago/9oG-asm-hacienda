@@ -1,44 +1,75 @@
-const auctions = [
-  {
-    img: "/images/remates/2025-03-18.jpg",
-    date: "Viernes 18 de Marzo",
-  },
-  {
-    img: "/images/remates/2025-03-28.jpg",
-    date: "Miércoles 28 de Noviembre",
-  },
-  {
-    img: "/images/remates/2025-03-18.jpg",
-    date: "Viernes 28 de Marzo",
-  },
-];
+import Image from "next/image";
+import { getAuctions } from "@/lib/contentful";
 
-export default function Auctions() {
+const now = new Date();
+
+export default async function Auctions() {
+  const auctions = await getAuctions();
+
+  // Filtrar remates futuros o del día
+  const upcoming = auctions.filter((auction) => {
+    const auctionDate = new Date(auction.fields.date);
+    return auctionDate >= new Date(now.setHours(0, 0, 0, 0));
+  });
+
+  // Ordenar por fecha ascendente
+  const sortedUpcoming = [...upcoming].sort(
+    (a, b) => new Date(a.fields.date) - new Date(b.fields.date)
+  );
+
   return (
     <section id="auctions" className="auctions">
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-md-6">
-            <div className="header">
+            <div className="header text-center mb-4">
               <h2>Próximos Remates</h2>
-              <p className="lead d-none">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              </p>
             </div>
           </div>
         </div>
+
         <div className="row justify-content-center">
-          {auctions.map((auction, index) => (
-            <div className="col-lg-3" key={index}>
-              <div className="card">
-                <div className="card-body">
-                  <h4 className="card-title">{auction.date}</h4>
+          {sortedUpcoming.length > 0 ? (
+            sortedUpcoming.map((auction) => {
+              const { title, image, date } = auction.fields;
+              const imgFile = image?.fields?.file;
+              const imgUrl = imgFile?.url;
+              const imgWidth = imgFile?.details?.image?.width;
+              const imgHeight = imgFile?.details?.image?.height;
+
+              return (
+                <div className="col-lg-3" key={auction.sys.id}>
+                  <div className="card">
+                    <div className="card-body">
+                      <h4 className="card-title">
+                        {new Date(date).toLocaleDateString("es-AR", {
+                          weekday: "long",
+                          day: "numeric",
+                          month: "long",
+                        })}
+                      </h4>
+                    </div>
+
+                    {imgUrl && imgWidth && imgHeight && (
+                      <Image
+                        src={`https:${imgUrl}`}
+                        alt={title}
+                        width={imgWidth}
+                        height={imgHeight}
+                        className="card-img-bottom"
+                      />
+                    )}
+                  </div>
                 </div>
-                {/* eslint-disable-next-line */}
-                <img src={auction.img} alt="" className="card-img-bottom" />
-              </div>
+              );
+            })
+          ) : (
+            <div className="col-12 text-center">
+              <p className="text-muted">
+                No hay remates disponibles en este momento.
+              </p>
             </div>
-          ))}
+          )}
         </div>
       </div>
     </section>
