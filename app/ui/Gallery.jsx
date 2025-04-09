@@ -9,16 +9,23 @@ export default async function Gallery() {
   const images = entries.flatMap((entry) => entry.fields.images || []);
 
   return (
-    <section className="gallery">
+    <section className="gallery bg-light">
       <div className="container">
         <div className="row justify-content-center mb-4">
           <div className="col-md-6 text-center">
-            <h2>Galería de Fotos</h2>
+            <h2 className="mb-4 text-primary">Resultados que hablan por sí mismos</h2>
+            <p className="lead mb-4">Más de tres décadas de experiencia se traducen en operaciones exitosas para nuestros clientes.</p>
           </div>
         </div>
 
         {/* Componente cliente que maneja la UI interactiva */}
         <GalleryClient images={images} />
+
+        <div className="row justify-content-center mt-5 mb-4">
+          <div className="col-md-6 text-center">
+            <h5 className=""><span className="fw-bold">Contactanos</span> y descubrí por qué productores y compradores confían en <span className="fw-bold">Alfredo S. Modino</span> para sus transacciones ganaderas.</h5>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -191,7 +191,7 @@ export default function Form() {
                         <span className="spinner-border spinner-border-sm ms-2"></span>
                       </>
                     ) : (
-                      "Enviar Consulta"
+                      "Enviar"
                     )}
                   </button>
                 </div>
