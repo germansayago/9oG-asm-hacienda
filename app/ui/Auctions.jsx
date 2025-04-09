@@ -17,13 +17,16 @@ export default async function Auctions() {
     (a, b) => new Date(a.fields.date) - new Date(b.fields.date)
   );
 
+  // const sortedUpcoming = [];
+
   return (
     <section id="auctions" className="auctions">
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-md-6">
             <div className="header text-center mb-4">
-              <h2>Próximos Remates</h2>
+              <h2 className="mb-4">Próximos Remates Ganaderos</h2>
+              <p className="lead mb-5">Planificá tu participación en nuestros remates de hacienda y no pierdas la oportunidad de obtener los mejores resultados</p>
             </div>
           </div>
         </div>

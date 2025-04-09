@@ -3,7 +3,10 @@ import CtaButton from "./CtaButton";
 
 export default function Cta() {
   return (
-    <section className="container">
+    <section className="bg-light">
+    <div className="container">
+
+    
       {/* <div className="container">
         <div className="row justify-content-between">
           <div className="col-md-7">
@@ -28,7 +31,7 @@ export default function Cta() {
               <div className="cta-title">
                 ¿Querés vender o comprar hacienda?
               </div>
-              <div className="cta-text">
+              <div className="cta-text px-2">
                 Dejanos tus datos y un asesor te contactará para brindarte toda
                 la información.
               </div>
@@ -41,6 +44,7 @@ export default function Cta() {
             <div className="cta-img"></div>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );
