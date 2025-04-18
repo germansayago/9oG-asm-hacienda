@@ -19,7 +19,7 @@ export default async function Gallery() {
               Resultados que hablan por sí mismos
             </h2>
             <p className="lead mb-4">
-              Más de tres décadas de experiencia se traducen en operaciones
+              Más de cuatro décadas de experiencia se traducen en operaciones
               exitosas para nuestros clientes.
             </p>
           </div>
@@ -28,7 +28,7 @@ export default async function Gallery() {
         {/* Componente cliente que maneja la UI interactiva */}
         <GalleryClient images={images} />
 
-        <div className="row justify-content-center mt-5 mb-4">
+        <div className="row justify-content-center mt-5">
           <div className="col-md-6 text-center">
             <h5 className="">
               <span className="fw-bold">Contactanos</span> y descubrí por qué

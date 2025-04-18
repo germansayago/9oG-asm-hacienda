@@ -14,11 +14,14 @@ export default function GalleryClient({ images }) {
   const [index, setIndex] = useState(0);
 
   const slides = Array.isArray(images)
-    ? images.map((img) => ({
-        src: `https:${img.fields.file.url}`,
-        alt: img.fields.title || "Imagen",
-      }))
+    ? images
+        .filter((img) => img.fields?.file?.url) // Excluir imagenes en modo "draft"
+        .map((img) => ({
+          src: `https:${img.fields.file.url}`,
+          alt: img.fields.title || "Imagen",
+        }))
     : [];
+
 
   if (slides.length === 0) {
     return (

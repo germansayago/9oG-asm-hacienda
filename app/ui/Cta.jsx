@@ -28,14 +28,15 @@ export default function Cta() {
         <div className="row">
           <div className="col-md-6 order-2">
             <div className="cta-content">
-              <div className="cta-title">
-                ¿Querés vender o comprar hacienda?
+              <div className="cta-title pt-3">
+                <h2 className="mb-3">¿Querés participar en nuestros remates?</h2>
+                <h3>¿Necesitás vender o comprar hacienda?</h3>
               </div>
               <div className="cta-text px-2">
                 Dejanos tus datos y un asesor te contactará para brindarte toda
                 la información.
               </div>
-              <div className="cta-button">
+              <div className="cta-button pb-2">
                 <CtaButton id="contact" text="Consultar ahora" />
               </div>
             </div>
