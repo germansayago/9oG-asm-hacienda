@@ -6,22 +6,22 @@ export default function Gracias() {
           <div className="col-md-10">
             <h3>Gracias por registrarte</h3>
             <p className="lead mb-4">
-              Uno de nuestros comerciales se pondrán en contacto contigo
+              Muy pronto, uno de nuestros comerciales se pondrá en contacto contigo
             </p>
             <h4 className="mt-3 mb-3">Escribinos por Whatsapp</h4>
             <div className="whatsapp">
               <div className="row justify-content-center">
                 <div className="col-md-3">
                   <h5>Hacienda Gorda</h5>
-                  <h6>Francisco Garin</h6>
+                  <h6>Pedro Altahaparro</h6>
                   <a
                     id="btn-hacienda"
-                    href="https://wa.me/543516509975"
+                    href="https://wa.me/541127837557"
                     className="btn btn-success mb-4"
                     rel="noopener noreferrer"
                     target="_blank"
                   >
-                    <i className="fa-brands fa-whatsapp"></i> +54 351 650 9975
+                    <i className="fa-brands fa-whatsapp"></i> +54 11 2783 7557
                   </a>
                 </div>
                 <div className="col-md-3">
@@ -46,7 +46,7 @@ export default function Gracias() {
               rel="noopener noreferrer"
               target="_blank"
             >
-              https://alfredosmondino.com/
+              alfredosmondino.com
             </a>
             <h4 className="mt-3">o que nos sigas en nuestras redes</h4>
             <div className="social">
