@@ -10,7 +10,9 @@ export default function Contact() {
             <div className="header">
               <h2 className="mb-4">Contactanos</h2>
               <h4 className="mb-3">¿Necesitás más información sobre nuestros remates?</h4>
-              <p className="lead">Nuestro equipo está a sólo un mensaje de distancia. <br/> <span className="fw-bold">¡Completa el formulario y agendá tu participación ahora!</span></p>
+              <h5 className="mb-3">¿Querés vender o comprar hacienda?</h5>
+              <p className="lead mb-2">Nuestro equipo está a sólo un mensaje de distancia. </p>
+              <p className="lead"><span className="fw-bold">¡Completa el formulario y agendá tu participación ahora!</span></p>
             </div>
           </div>
         </div>
