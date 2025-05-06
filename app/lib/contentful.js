@@ -6,10 +6,15 @@ const client = createClient({
 });
 
 // Obtener todos los remates
-export async function getAuctions() {
-  const entries = await client.getEntries({ content_type: "auctions" });
-  return entries.items;
-}
+export const getAuctions = async () => {
+  try {
+    const entries = await client.getEntries({ content_type: 'auctions' });
+    return entries.items; // Devuelve los remates
+  } catch (error) {
+    console.error("Error fetching auctions from Contentful:", error);
+    return []; // En caso de error, retorna un array vacío
+  }
+};
 
 // Obtener todas las imágenes de la galería
 export async function getGalleryImages() {
