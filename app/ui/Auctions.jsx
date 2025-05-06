@@ -13,7 +13,7 @@ export default async function Auctions() {
   });
 
   // Ordenar por fecha ascendente
-  const sortedUpcoming = [...upcoming].sort(
+  const sortedUpcoming = upcoming.sort(
     (a, b) => new Date(a.fields.date) - new Date(b.fields.date)
   );
 
