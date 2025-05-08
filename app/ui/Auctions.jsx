@@ -8,6 +8,8 @@ const now = new Date();
 export default async function Auctions() {
   const auctions = await getAuctions();
 
+  console.log(auctions);
+
   // Filtrar remates futuros o del día
   const upcoming = auctions.filter((auction) => {
     const auctionDate = new Date(auction.fields.date);
@@ -18,6 +20,7 @@ export default async function Auctions() {
   const sortedUpcoming = upcoming.sort(
     (a, b) => new Date(a.fields.date) - new Date(b.fields.date)
   );
+  console.log(sortedUpcoming);
 
   // const sortedUpcoming = [];
 
