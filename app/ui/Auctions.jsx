@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Image from "next/image";
 import { getAuctions } from "@/lib/contentful";
 
@@ -26,7 +28,10 @@ export default async function Auctions() {
           <div className="col-md-10 col-lg-6">
             <div className="header text-center mb-4">
               <h2 className="mb-4">Próximos Remates Ganaderos</h2>
-              <p className="lead mb-5">Planificá tu participación en nuestros remates de hacienda y no pierdas la oportunidad de obtener los mejores resultados</p>
+              <p className="lead mb-5">
+                Planificá tu participación en nuestros remates de hacienda y no
+                pierdas la oportunidad de obtener los mejores resultados
+              </p>
             </div>
           </div>
         </div>

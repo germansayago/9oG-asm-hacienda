@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
       <body suppressHydrationWarning={true}>
         <Header />
         {children}
-        {!process.env.NODE_ENV != "development" && (
+        {process.env.NODE_ENV === "produccion" && (
           <GoogleTagManager gtmId="GTM-TMTTM928" />
         )}
         <Footer />
