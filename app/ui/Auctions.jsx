@@ -1,4 +1,4 @@
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 import Image from "next/image";
 import { getAuctions } from "@/lib/contentful";
@@ -7,8 +7,6 @@ const now = new Date();
 
 export default async function Auctions() {
   const auctions = await getAuctions();
-
-  console.log(auctions);
 
   // Filtrar remates futuros o del día
   const upcoming = auctions.filter((auction) => {
@@ -20,7 +18,6 @@ export default async function Auctions() {
   const sortedUpcoming = upcoming.sort(
     (a, b) => new Date(a.fields.date) - new Date(b.fields.date)
   );
-  console.log(sortedUpcoming);
 
   // const sortedUpcoming = [];
 
