@@ -1,23 +1,35 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { getAuctions } from "@/lib/contentful";
 
-const now = new Date();
+export default function Auctions() {
+  const [auctions, setAuctions] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-export default async function Auctions() {
-  const auctions = await getAuctions();
+  useEffect(() => {
+    fetch("/api/auctions")
+      .then((res) => res.json())
+      .then((data) => {
+        const now = new Date();
+        const upcoming = data.filter((auction) => {
+          const auctionDate = new Date(auction.fields.date);
+          return auctionDate >= new Date(now.setHours(0, 0, 0, 0));
+        });
 
-  // Filtrar remates futuros o del día
-  const upcoming = auctions.filter((auction) => {
-    const auctionDate = new Date(auction.fields.date);
-    return auctionDate >= new Date(now.setHours(0, 0, 0, 0));
-  });
+        const sorted = upcoming.sort(
+          (a, b) => new Date(a.fields.date) - new Date(b.fields.date)
+        );
 
-  // Ordenar por fecha ascendente
-  const sortedUpcoming = upcoming.sort(
-    (a, b) => new Date(a.fields.date) - new Date(b.fields.date)
-  );
+        setAuctions(sorted);
+      })
+      .catch(() => setAuctions([]))
+      .finally(() => setLoading(false));
+  }, []);
 
-  // const sortedUpcoming = [];
+  if (loading) {
+    return <p className="text-center">Cargando remates...</p>;
+  }
 
   return (
     <section id="auctions" className="auctions">
@@ -26,14 +38,17 @@ export default async function Auctions() {
           <div className="col-md-10 col-lg-6">
             <div className="header text-center mb-4">
               <h2 className="mb-4">Próximos Remates Ganaderos</h2>
-              <p className="lead mb-5">Planificá tu participación en nuestros remates de hacienda y no pierdas la oportunidad de obtener los mejores resultados</p>
+              <p className="lead mb-5">
+                Planificá tu participación en nuestros remates de hacienda y no
+                pierdas la oportunidad de obtener los mejores resultados
+              </p>
             </div>
           </div>
         </div>
 
         <div className="row justify-content-center">
-          {sortedUpcoming.length > 0 ? (
-            sortedUpcoming.map((auction) => {
+          {auctions.length > 0 ? (
+            auctions.map((auction) => {
               const { title, image, date } = auction.fields;
               const imgFile = image?.fields?.file;
               const imgUrl = imgFile?.url;

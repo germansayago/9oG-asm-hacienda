@@ -8,7 +8,7 @@ export default async function Gallery() {
   // Unificar todas las imágenes cargadas en un único array
   const images = entries.flatMap((entry) => entry.fields.images || []);
 
-  console.log(images);
+  //console.log(images);
 
   return (
     <section className="gallery bg-light">
