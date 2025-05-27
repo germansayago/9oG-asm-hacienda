@@ -4,7 +4,7 @@ const nextConfig = {
     quietDeps: true, // Ignora warnings de dependencias como Bootstrap
   },
   images: {
-    domains: ["images.ctfassets.net"],
+    domains: ["images.ctfassets.net", "cdn.contentful.com"],
   },
 };
 
